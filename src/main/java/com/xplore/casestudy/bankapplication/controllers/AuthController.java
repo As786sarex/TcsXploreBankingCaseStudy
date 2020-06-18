@@ -24,5 +24,10 @@ public class AuthController {
         return "redirect:home";
     }
 
+    @GetMapping("/error")
+    public String error(){
+        return "error_controller";
+    }
+
 
 }

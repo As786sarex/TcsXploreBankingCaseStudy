@@ -17,7 +17,6 @@
     <properties>
         <java.version>1.8</java.version>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -97,7 +96,6 @@
             <version>13.0</version>
             <scope>compile</scope>
         </dependency>
-
     </dependencies>
 
     <build>

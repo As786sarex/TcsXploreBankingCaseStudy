@@ -3,7 +3,6 @@ package com.xplore.casestudy.bankapplication;
 import com.xplore.casestudy.bankapplication.models.User;
 import com.xplore.casestudy.bankapplication.repositories.CustomerRepository;
 import com.xplore.casestudy.bankapplication.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,7 +15,6 @@ public class BankapplicationApplication implements CommandLineRunner {
 
     private final CustomerRepository customerRepository;
     private final UserRepository repository;
-    @Autowired
     private final PasswordEncoder encoder;
 
     public BankapplicationApplication(UserRepository repository, PasswordEncoder encoder, CustomerRepository customerRepository) {

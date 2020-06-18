@@ -20,6 +20,8 @@ public class MvcConfig implements WebMvcConfigurer {
                         "/css/**",
                         "/img/**",
                         "classpath:/webjars/");
+        registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/");
+
     }
 
     @Override
