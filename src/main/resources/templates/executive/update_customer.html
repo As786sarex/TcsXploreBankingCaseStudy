@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head th:replace="fragment::headerfiles">
+</head>
+<body>
+<div th:replace="fragment::navbar">
+
+</div>
+<br>
+<br>
+<br>
+<div class="row register-form">
+    <div class="col-md-8 offset-md-2">
+        <form class="custom-form">
+            <h1>Update Customer Details</h1>
+            <div th:if="${param.message}" th:text="${param.message}" class="alert alert-danger">
+            </div>
+
+            <div class="form-row form-group">
+                <div class="col-sm-4 label-column"><label class="col-form-label">Customer Id : </label></div>
+                <div class="col-sm-4 input-column">
+                    <div class="dropdown">
+                        <select class="form-control form-control-sm" id="customer_selection">
+                            <option th:each="customer: ${customerList}" th:text="${customer.getCustomerId()}"
+                                    th:value="${customer.customerId}">Customer Id
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+
+            <button onclick="process('jebcwjbwhjb')" class="btn btn-light submit-button" type="button">Search
+            </button>
+        </form>
+        <div id="form-block">
+
+        </div>
+
+    </div>
+</div>
+<div th:fragment="resultCustomer" th:unless="${containerCustomer!=null}">
+    <form class="custom-form" th:action="@{/customer/update_customer}" th:object="${modelCustomer}"
+          method="post">
+        <h1>Register Form</h1>
+        <div th:if="${param.error}" class="alert alert-danger">
+            Invalid username and password.
+        </div>
+        <div class="form-row form-group  required">
+            <div class="col-sm-4 label-column"><label class="col-form-label" for="name-input-field">Customer SSN
+                Id </label>
+            </div>
+            <div class="col-sm-6 input-column"><input class="form-control disabled" disabled th:field="*{ssn}"
+                                                      name="ssn"
+                                                      id="name-input-field" type="number"></div>
+        </div>
+        <div class="form-row form-group  required">
+            <div class="col-sm-4 label-column"><label class="col-form-label" for="id-input-field">Customer SSN
+                Id </label>
+            </div>
+            <div class="col-sm-6 input-column"><input class="form-control ui-state-disabled disabled"
+                                                      th:field="*{customerId}"
+                                                      name="customerId"
+                                                      id="id-input-field" type="hidden">
+                <input class="form-control ui-state-disabled disabled" disabled
+                       name="customerId"
+                       th:value="${modelCustomer.customerId}"
+                       type="number"></div>
+        </div>
+        <div class="form-row form-group required">
+            <div class="col-sm-4 label-column"><label class="col-form-label" for="email-input-field">Customer
+                New Name<span style="text-decoration: #1c7430;">*</span> </label>
+            </div>
+            <div class="col-sm-6 input-column"><input name="name" th:field="*{name}" id="email-input-field" required
+                                                      class="form-control" type="text"></div>
+        </div>
+
+        <div class="form-row form-group">
+            <div class="col-sm-4 label-column"><label class="col-form-label"
+                                                      for="repeat-pawssword-input-field">
+                New Age<span style="text-decoration: #1c7430;">*</span></label></div>
+            <div class="col-sm-6 input-column"><input name="age" th:field="*{age}" id="repeat-pawssword-input-field"
+                                                      class="form-control" type="number"></div>
+        </div>
+        <div class="form-row form-group  required">
+            <div class="col-sm-4 label-column"><label class="col-form-label"
+                                                      for="pawssword-input-field">
+                New Address<span style="text-decoration: #1c7430;">*</span></label></div>
+            <div class="col-sm-6 input-column"><input name="address" th:field="*{address}" class="form-control"
+                                                      type="text" id="pawssword-input-field"></div>
+        </div>
+        <button class="btn btn-light submit-button" type="submit">Update Customer</button>
+    </form>
+</div>
+
+<br>
+<br>
+<div th:replace="fragment::footer">
+
+</div>
+
+<script type="application/javascript">
+    function process(s) {
+        const customer_selection = document.getElementById('customer_selection');
+        const selected = customer_selection.options[customer_selection.selectedIndex].value;
+        const url = '/customer/update_customer/' + selected;
+        $("#form-block").load(url);
+        $('html,body').animate({
+            scrollTop: $("#form-block").offset().top
+        }, 1000);
+    }
+</script>
+</body>
+</html>

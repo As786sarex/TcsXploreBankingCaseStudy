@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment::headerfiles">
+</head>
+<body>
+<div class="row register-form">
+    <div class="col-md-8 offset-md-2">
+        <form class="custom-form" th:action="@{/accounts/search_account}"
+              method="post">
+            <h1>Search Account</h1>
+            <div th:if="${param.error}" class="alert alert-danger">
+                Account Not Found!!
+            </div>
+            <div class="form-row form-group">
+                <div class="col-sm-4 label-column"><label class="col-form-label">Account Id : </label></div>
+                <div class="col-sm-4 input-column">
+                    <div class="dropdown">
+                        <select name="accountId" th:name="accountId"
+                                required class="form-control form-control-sm"
+                                id="account_selection">
+                            <option th:each="account: ${accountIds}" th:text="${account}"
+                                    th:value="${account}">Customer Id
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-light submit-button" type="submit">Search Account</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

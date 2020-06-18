@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head th:replace="fragment::headerfiles">
+</head>
+<body>
+<div th:replace="fragment::navbar">
+
+</div>
+<br>
+<br>
+<br>
+<div class="row register-form">
+    <div class="col-md-8 offset-md-2">
+        <form class="custom-form" method="post" th:action="@{/accounts/delete_account}">
+            <h1>Delete Customer</h1>
+            <div th:if="${param.message}" th:text="${param.message}" class="alert alert-danger">
+            </div>
+
+            <div class="form-row form-group">
+                <div class="col-sm-4 label-column"><label class="col-form-label">Account Id : </label></div>
+                <div class="col-sm-4 input-column">
+                    <div class="dropdown">
+                        <select name="id" th:name="id" required class="form-control form-control-sm"
+                                id="account_selection">
+                            <option th:each="account: ${accountList}" th:text="${account}"
+                                    th:value="${account}">Customer Id
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+
+            <button class="btn btn-light submit-button" type="submit">Delete Account</button>
+        </form>
+        <div id="form-block">
+
+        </div>
+
+    </div>
+</div>
+<br>
+<br>
+<div th:replace="fragment::footer">
+
+</div>
+
+<script type="application/javascript">
+    function process(s) {
+        const customer_selection = document.getElementById('account_selection');
+        const selected = customer_selection.options[customer_selection.selectedIndex].value;
+        const url = '/accounts/delete_account/' + selected;
+        $.load(url);
+    }
+</script>
+
+</body>
+</html>

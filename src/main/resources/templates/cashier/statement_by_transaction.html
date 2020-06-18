@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head th:replace="fragment::headerfiles">
+</head>
+<body>
+<div th:replace="fragment::navbar-cashier">
+
+</div>
+<br>
+<br>
+<br>
+<div class="row register-form">
+    <div class="col-md-8 offset-md-2">
+        <form class="custom-form" th:action="@{'/accounts/transfer_money/'+${accountId}}"
+              method="post">
+            <h1>Deposit Money</h1>
+            <div th:if="${param.message}" th:text="${param.message}" class="alert alert-primary">
+            </div>
+            <div class="form-row form-group">
+                <div class="col-sm-4 label-column"><label class="col-form-label">Account ID : </label></div>
+                <div class="col-sm-4 label-column">
+                    <input name="accountId" th:name="accountId" disabled
+                           th:value="${accountId}"
+                           id="accountId_box"
+                           required
+                           class="form-control" type="number">
+                </div>
+            </div>
+            <div class="form-row form-group">
+                <div class="col-sm-4 label-column"><label class="col-form-label">Target Account Id : </label></div>
+                <div class="col-sm-4 input-column">
+                    <div class="dropdown">
+                        <select name="targetAccountId" th:name="targetAccountId"
+                                required class="form-control form-control-sm"
+                                id="n_selection">
+                            <option th:each="element: ${list}" th:text="${element}"
+                                    th:value="${element}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-light submit-button" onclick="process()" type="button">Transfer Money</button>
+        </form>
+    </div>
+</div>
+<br>
+<br>
+<div id="statement">
+
+</div>
+<br>
+<br>
+<div th:replace="fragment::footer">
+
+</div>
+<script type="application/javascript">
+    function process() {
+        const customer_selection = document.getElementById('n_selection');
+        const accountIdBox = document.getElementById('accountId_box');
+        const accId = accountIdBox.value;
+        const selected = customer_selection.options[customer_selection.selectedIndex].value;
+        const url = '/accounts/statement_by_transaction_cnt/' + accId + '/' + selected;
+        $("#statement").load(url);
+        $('html,body').animate({
+            scrollTop: $("#statement").offset().top
+        }, 1000);
+    }
+</script>
+</body>
+</html>

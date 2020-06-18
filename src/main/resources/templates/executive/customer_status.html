@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}"/>
+    <script rel="script" th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+    <script rel="script" th:src="@{/webjars/bootstrap/4.5.0/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div th:replace="fragment::navbar">
+
+</div>
+<br>
+<br>
+<br>
+<div class="m-5">
+    <main class="container">
+        <h3 class="mb-3 align-content-md-center">Customer Status:</h3>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Customer ID</th>
+                <th scope="col">Customer SSN ID</th>
+                <th scope="col">Status</th>
+                <th scope="col">Message</th>
+                <th scope="col">Last Updated</th>
+                <th scope="col">Operations</th>
+                <th scope="col">View Profile</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="status: ${statusList}">
+                <th scope="row" th:text="${status.customerId}"></th>
+                <td th:text="${status.ssn}"></td>
+                <td th:text="${status.status}"></td>
+                <td th:text="${status.message}"></td>
+                <td th:text="${{status.lastUpdated}}"></td>
+                <td><p  class="btn-link">Refresh</p></td>
+                <td ><p class="btn-link">View Details</p></td>
+            </tr>
+            </tbody>
+        </table>
+    </main>
+</div>
+<br>
+<br>
+<div th:replace="fragment::footer">
+
+</div>
+
+</body>
+</html>
